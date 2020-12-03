@@ -1,0 +1,8 @@
+name_path: os-health-monitor
+name_title:
+- api_monitor.sh
+name_description: OpenStack health monitor script
+appendix: |-
+  This repository contains Kubernetes manifests to deploy the
+  [Openstack health monitor script](https://github.com/SovereignCloudStack/openstack-health-monitor)
+  alongside a telegraf sidecar exposing metrics in the prometheus exposition format.
