@@ -12,6 +12,8 @@ jobs:
     timeout-minutes: 15
     steps:
     - uses: actions/checkout@v2
+    - name: Fetch testing config
+      run: ./test/ci-configure
     - name: Run conftest
       uses: stefanprodan/kube-tools@v1
       with:

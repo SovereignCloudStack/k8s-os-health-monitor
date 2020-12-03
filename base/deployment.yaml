@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api_monitor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api_monitor
+  template:
+    metadata:
+      labels:
+        app: api_monitor
+    spec:
+      volumes:
+      - name: dot-config-openstack
+        secret:
+          secretName: dot-config-openstack
+      containers:
+      - image: telegraf:1.16.3-alpine
+        name: telegraf
+      - image: debian:bullseye
+        name: debian
+        resources: {}
+        volumeMounts:
+        - name: dot-config-openstack
+          mountPath: /root/.config/openstack
+        command:
+        - sh
+        - -c
+        - |
+            set -ex
+            apt-get update && apt-get install -y python3-openstackclient git
+            git clone https://github.com/SovereignCloudStack/openstack-health-monitor.git
+            cd openstack-health-monitor
+            export OS_CLOUD=gx-scs-plusserver
+            openstack server list
+            sleep 10
