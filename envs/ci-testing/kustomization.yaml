@@ -1,7 +1,2 @@
 bases:
 - ../../base
-
-secretGenerator:
-- name: dot-config-openstack
-  files:
-  - clouds.yaml
