@@ -1,1 +1,3 @@
 #!/bin/bash
+
+kubectl logs deployment/os-health-monitor -f

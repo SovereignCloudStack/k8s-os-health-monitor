@@ -1,2 +1,7 @@
 resources:
 - deployment.yaml
+
+configMapGenerator:
+- name: telegraf-config
+  files:
+  - telegraf.conf

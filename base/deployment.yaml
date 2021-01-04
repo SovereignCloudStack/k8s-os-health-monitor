@@ -16,26 +16,35 @@ spec:
       - name: dot-config-openstack
         secret:
           secretName: dot-config-openstack
+      - name: telegraf-config
+        secret:
+          secretName: telegraf-config
       containers:
       - image: telegraf:1.16.3-alpine
         name: telegraf
         readinessProbe:
           httpGet:
-            path: /healthz
-      - image: debian:bullseye
-        name: debian
+            path: /metrics
+            port: 8181
+        volumeMounts:
+        - name: telegraf-config
+          mountPath: /etc/telegraf
+      - image: quay.io/sovereigncloudstack/openstack-health-monitor@sha256:9df59269670b81c5d663a58be5eed6e2ea481cb6758ee9cbba1480b6de297155
+        name: os-health-monitor
         resources: {}
         volumeMounts:
         - name: dot-config-openstack
           mountPath: /root/.config/openstack
+        env:
+        - name: OS_CLOUD
+          value: gx-scs-plusserver
         command:
         - sh
         - -c
         - |
             set -ex
-            apt-get update && apt-get install -y python3-openstackclient git
-            git clone https://github.com/SovereignCloudStack/openstack-health-monitor.git
-            cd openstack-health-monitor
-            export OS_CLOUD=gx-scs-plusserver
-            openstack server list
-            sleep 10
+            while [[ 0 = 0 ]]
+            do
+                openstack server list
+                sleep 10
+            done
