@@ -30,8 +30,8 @@ jobs:
         version: v0.8.1
     - name: manual-prepare
       run: |
-        echo "$OPENSTACK_CLOUDS_YAML" > ~/clouds.yml
-        kubectl create secret generic dot-config-openstack --from-file=$HOME/clouds.yml
+        echo "$OPENSTACK_CLOUDS_YAML" > ~/clouds.yaml
+        kubectl create secret generic dot-config-openstack --from-file=$HOME/clouds.yaml
     - name: Setup fluxctl # Following steps are based on fluxctl-action docs
       uses: fluxcd/fluxctl-action@v1.21.0
     - name: Install Flux
