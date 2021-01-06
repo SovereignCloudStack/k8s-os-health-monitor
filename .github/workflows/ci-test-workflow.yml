@@ -29,6 +29,8 @@ jobs:
       with:
         version: v0.8.1
     - name: manual-prepare
+      env:
+        OPENSTACK_CLOUDS_YAML: "${{ secrets.OPENSTACK_CLOUDS_YAML }}"
       run: |
         echo "$OPENSTACK_CLOUDS_YAML" > ~/clouds.yaml
         kubectl create secret generic dot-config-openstack --from-file=$HOME/clouds.yaml
