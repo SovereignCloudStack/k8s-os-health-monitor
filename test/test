@@ -1,3 +1,4 @@
 #!/bin/bash
 
-kubectl logs deployment/os-health-monitor -f
+kubectl logs deployment/os-health-monitor telegraf
+kubectl logs deployment/os-health-monitor os-health-monitor -f
