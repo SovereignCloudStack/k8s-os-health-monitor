@@ -34,7 +34,7 @@ spec:
         resources: {}
         volumeMounts:
         - name: dot-config-openstack
-          mountPath: /root/.config/openstack
+          mountPath: /etc/openstack
         env:
         - name: OS_CLOUD
           value: gx-scs-plusserver
