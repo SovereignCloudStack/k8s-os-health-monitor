@@ -29,7 +29,7 @@ spec:
         volumeMounts:
         - name: telegraf-config
           mountPath: /etc/telegraf
-      - image: quay.io/sovereigncloudstack/openstack-health-monitor@sha256:9df59269670b81c5d663a58be5eed6e2ea481cb6758ee9cbba1480b6de297155
+      - image: quay.io/sovereigncloudstack/openstack-health-monitor:latest
         name: os-health-monitor
         resources: {}
         volumeMounts:
