@@ -38,4 +38,4 @@ spec:
         env:
         - name: OS_CLOUD
           value: gx-scs-plusserver
-        args: ['-n', '8', '-i', '10', '-S']
+        args: ['-n', '8', '-i', '10', '-S', '-o', '-D']
