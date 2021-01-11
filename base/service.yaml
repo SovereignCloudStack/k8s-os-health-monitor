@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: os-health-monitor
+spec:
+  selector:
+    app: os-health-monitor
+  ports:
+  - name: prometheus
+    port: 8181
+    targetPort: 8181
