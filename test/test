@@ -1,4 +1,11 @@
 #!/bin/bash
 
+set -ex
+
 kubectl logs deployment/os-health-monitor telegraf
-kubectl logs deployment/os-health-monitor os-health-monitor -f
+kubectl logs deployment/os-health-monitor os-health-monitor -f &
+
+sleep 20
+
+OUTPUT=$(kubectl run -i --rm --restart=Never --image=busybox --command health-check -- wget -O - -q http://os-health-monitor:8181/metrics)
+echo $OUTPUT
