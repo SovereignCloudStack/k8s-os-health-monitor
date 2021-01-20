@@ -2,10 +2,15 @@
 
 set -ex
 
-kubectl logs deployment/os-health-monitor telegraf
-kubectl logs deployment/os-health-monitor os-health-monitor -f &
+cat - > script.sh <<EOF
+set -ex
+apk add --no-cache jq curl
+OUTPUT=0
+until [[ \$OUTPUT -gt 0 ]]
+do
+	OUTPUT="\$(curl -d 'query=apimonitor_duration_bucket{cmd=%22glance%22,le=%2210%22}' 'http://os-health-monitor:9090/api/v1/query' | jq -r '.data.result[0].value[1]')"
+	sleep 5
+done
+EOF
 
-sleep 180
-
-OUTPUT=$(kubectl run -i --rm --restart=Never --image=busybox --command health-check -- wget -O - -q http://os-health-monitor:8181/metrics)
-echo $OUTPUT
+kubectl run -i --rm --restart=Never --image=alpine --command health-check -- sh -c "$(cat script.sh)"
