@@ -2,4 +2,4 @@ bases:
 - ../../base
 
 patches:
-- prometheus.yaml
+- path: prometheus.yaml
