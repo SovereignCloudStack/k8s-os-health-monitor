@@ -5,8 +5,8 @@ on:
   push:
     paths:
       - .github/workflows/sync-with-generics-repository.yml
-  schedule: 
-    - cron: "0 0 * * *"
+  #schedule:
+  #  - cron: "0 0 * * *"
   repository_dispatch:
     types: [sync-with-generics-repository]
 
