@@ -1,3 +1,0 @@
-#!/bin/bash
-
-echo "$OS_CLOUDS_YAML" > envs/ci-testing/clouds.yaml
